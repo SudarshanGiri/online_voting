@@ -1,7 +1,7 @@
 <?php
 	include("admin/dbcon.php");
 	session_start();
-	session_destroy();
+	// session_destroy();
 	$key = 'qkwjdiw239&&jdafweihbrhnan&^%$ggdnawhd4njshjwuuO';
 	function encryptthis($data, $key) { //encryption function
 	$encryption_key = base64_decode($key); 
@@ -29,12 +29,12 @@ while($row1 = $query->fetch_array()){
 $votesTable="votes_".$election_id;
 /* end Testing*/
 		//insert votes in the votes table
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$pres_id', '$_SESSION[voters_id]')") or die(mysql_error());
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$vpinternal_id', '$_SESSION[voters_id]')") or die(mysql_error());
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$vpexternal_id', '$_SESSION[voters_id]')") or die(mysql_error());
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$secretary_id', '$_SESSION[voters_id]')") or die(mysql_error());
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$auditor_id', '$_SESSION[voters_id]')") or die(mysql_error());
-		$conn->query("INSERT INTO `$votesTable` VALUES('', '$treasurer_id', '$_SESSION[voters_id]')") or die(mysql_error());
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$pres_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$vpinternal_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$vpexternal_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$secretary_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$auditor_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
+		$conn->query("INSERT INTO `$votesTable` VALUES('', '$treasurer_id', '$_SESSION[voters_id]')") or die(mysqli_error($conn));
 	//	$conn->query("INSERT INTO `votes` VALUES('', '$pio_id', '$_SESSION[voters_id]')") or die(mysql_error());
 	//	$conn->query("INSERT INTO `votes` VALUES('', '$busman_id', '$_SESSION[voters_id]')") or die(mysql_error());
 	//	$conn->query("INSERT INTO `votes` VALUES('', '$sgtarm_id', '$_SESSION[voters_id]')") or die(mysql_error());
@@ -44,7 +44,7 @@ $votesTable="votes_".$election_id;
 
 
 		//update voter status after voting
-		$conn->query("UPDATE `voters` SET `status` = 'Voted' WHERE `voters_id` = '$_SESSION[voters_id]'") or die(mysql_error());
+		$conn->query("UPDATE `voters` SET `status` = 'Voted' WHERE `voters_id` = '$_SESSION[voters_id]'") or die(mysqli_error($conn));
 		echo"<script> alert('Your vote is Submitted. Thank you');</script>";
 		header("location:index.php");
 		

@@ -565,6 +565,9 @@ $(function() {
 		alert("Sorry, your browser does not support HTML5 geolocation.");
 	}
 });
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
 </script>
 <!---end script for select district zone and municipality-->
 	

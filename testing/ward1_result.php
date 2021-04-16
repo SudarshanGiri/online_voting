@@ -11,11 +11,33 @@
 
 <!--initialize values for counting in chart -->
 <?php
+//initializing variables for counting the votes of a specific party in specificposition for use in BarGraph
 
-$count_NCP_WardChairperson=0;
-$count_NCP_Member=0;
-$count_NCP_WomanMember=0;
-$count_NCP_DalitWomanMember=0;
+//Nepal Communist Party
+$count_nepalCommunistParty_WardChairperson=0;
+$count_nepalCommunistParty_Member=0;
+$count_nepalCommunistParty_WomanMember=0;
+$count_nepalCommunistParty_DalitWomanMember=0;
+
+//Nepali Congress 
+$count_nepaliCongress_WardChairperson=0;
+$count_nepaliCongress_Member=0;
+$count_nepaliCongress_WomanMember=0;
+$count_nepaliCongress_DalitWomanMember=0;
+
+//Rastriya Janata Party
+$count_rastriyaJanataParty_WardChairperson=0;
+$count_rastriyaJanataParty_Member=0;
+$count_rastriyaJanataParty_WomanMember=0;
+$count_rastriyaJanataParty_DalitWomanMember=0;
+
+//Samajbadi Party
+$count_samajbadiParty_WardChairperson=0;
+$count_samajbadiParty_Member=0;
+$count_samajbadiParty_WomanMember=0;
+$count_samajbadiParty_DalitWomanMember=0;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +54,7 @@ $count_NCP_DalitWomanMember=0;
 
 
 			<div class="panel-heading" style="background-color:black;color:white;text-align:center;">
-				REPORT (WARD <?php echo "$ward"; ?>)
+				<h1>Election Result (WARD <?php echo "$ward"; ?>)</h1>
 			</div>
 			<!--mayor and Deputy Mayor -->
 				
@@ -40,7 +62,8 @@ $count_NCP_DalitWomanMember=0;
 						<thead>
 							<th style = "width:600px;" class = "alert alert-success">Candidate for Mayor</th>
 							<th style = "width:200px;"class = "alert alert-success">Image</th>
-							<th class = "alert alert-success">Total</th>
+							<th style = "width:200px;"class = "alert alert-success">Party Name</th>
+							<th class = "alert alert-success">Total Vote</th>
 						
 						</thead>
 						<?php
@@ -55,6 +78,29 @@ $count_NCP_DalitWomanMember=0;
 						<tbody> 
 							<td><?php echo $fetch ['firstname']. " ".$fetch ['lastname'];?></td>
 							<td><img src = "../admin/<?php echo $fetch ['img'];?>" style = "width:40px; height:40px; border-radius:500px; " >
+							<td><?php echo $fetch ['party_name']; ?></td>
+	
+
+							<?php
+
+								if($fetch['party_name']=="Nepal Communist Party"){
+									$count_nepalCommunistParty_Mayor = $count;
+
+								}
+								if($fetch['party_name']=="Nepali Congress"){
+
+									$count_nepaliCongress_Mayor = $count;
+								}
+								if($fetch['party_name']=="Rastriya Janata Party"){
+									$count_rastriyaJanataParty_Mayor = $count;
+								}
+								if($fetch['party_name']=="Samajbadi Party"){
+									$count_samajbadiParty_Mayor = $count;
+									
+								}
+
+
+							?>
 							<td style = "width:20px; text-align:center"><button class = "btn btn-primary"disabled><?php echo $count;?></button>	</td>
 						<?php }?>
 						</tbody>
@@ -65,7 +111,9 @@ $count_NCP_DalitWomanMember=0;
 						<thead>
 							<td style = "width:600px;"class = "alert alert-success">Deputy Mayor</td>
 							<td style = "width:200px;" class = "alert alert-success">Image</td>
-							<td class = "alert alert-success">Total</td>
+							<td style = "width:200px;" class = "alert alert-success">Party Name</td>
+
+							<td class = "alert alert-success">Total Vote</td>
 						
 						</thead>
 						<?php
@@ -79,6 +127,7 @@ $count_NCP_DalitWomanMember=0;
 						<tbody> 
 							<td><?php echo $fetch ['firstname']. " ".$fetch ['lastname'];?></td>
 							<td><img src = "../admin/<?php echo $fetch ['img'];?>" style = "width:40px; height:40px; border-radius:500px; " >
+							<td><?php echo $fetch ['party_name']; ?></td>
 
 						
 
@@ -97,7 +146,7 @@ $count_NCP_DalitWomanMember=0;
 						<td style = "width:200px;" class = "alert alert-success">Image</td>
 						<td style = "width:200px;" class = "alert alert-success">Party Name</td>
 
-						<td class = "alert alert-success">Total</td>
+						<td class = "alert alert-success">Total Vote</td>
 					
 					</thead>
 					<?php
@@ -114,12 +163,24 @@ $count_NCP_DalitWomanMember=0;
 						<td><?php echo $fetch ['party_name']; ?></td>
 						
 						<?php
-						echo $fetch ['party_name'];
-						
+						//testing the count of votes for bar graph
+						// echo $fetch ['party_name'];
+				
 							if($fetch['party_name']=="Nepal Communist Party"){
-								$count_NCP_WardChairperson= $count_NCP_WardChairperson+1;
-
+								$count_nepalCommunistParty_WardChairperson= $count;
+							
 							}
+							if($fetch['party_name']=="Nepali Congress"){
+						
+								$count_nepaliCongress_WardChairperson= $count;
+							}
+							if($fetch['party_name']=="Rastriya Janata Party"){
+								$count_rastriyaJanataParty_WardChairperson= $count;
+							}
+							if($fetch['party_name']=="Samajbadi Party"){
+								$count_samajbadiParty_WardChairperson= $count;
+							}
+
 						?>
                       
 
@@ -134,7 +195,8 @@ $count_NCP_DalitWomanMember=0;
 					<thead>
 						<td style = "width:600px;"class = "alert alert-success">Member</td>
 						<td style = "width:200px;" class = "alert alert-success">Image</td>
-						<td class = "alert alert-success">Total</td>
+						<td style = "width:200px;" class = "alert alert-success">Party Name</td>
+						<td class = "alert alert-success">Total Vote</td>
 					
 					</thead>
 					<?php
@@ -148,6 +210,7 @@ $count_NCP_DalitWomanMember=0;
 					<tbody> 
 						<td><?php echo $fetch ['firstname']. " ".$fetch ['lastname'];?></td>
 						<td><img src = "../admin/<?php echo $fetch ['img'];?>" style = "width:40px; height:40px; border-radius:500px; " >
+						<td><?php echo $fetch ['party_name']; ?></td>
 
                       
 
@@ -161,7 +224,8 @@ $count_NCP_DalitWomanMember=0;
 					<thead>
 						<td style = "width:600px;"class = "alert alert-success">Woman Member</td>
 						<td style = "width:200px;" class = "alert alert-success">Image</td>
-						<td class = "alert alert-success">Total</td>
+						<td style = "width:200px;" class = "alert alert-success">Party Name</td>
+						<td class = "alert alert-success">Total Vote</td>
 					
 					</thead>
 					<?php
@@ -175,6 +239,7 @@ $count_NCP_DalitWomanMember=0;
 					<tbody> 
 						<td><?php echo $fetch ['firstname']. " ".$fetch ['lastname'];?></td>
 						<td><img src = "../admin/<?php echo $fetch ['img'];?>" style = "width:40px; height:40px; border-radius:500px; " >
+						<td><?php echo $fetch ['party_name']; ?></td>
 
                       
 
@@ -188,7 +253,8 @@ $count_NCP_DalitWomanMember=0;
 					<thead>
 						<td style = "width:600px;"class = "alert alert-success">Dalit Woman Woman Member</td>
 						<td style = "width:200px;" class = "alert alert-success">Image</td>
-						<td class = "alert alert-success">Total</td>
+						<td style = "width:200px;" class = "alert alert-success">Party Name</td>
+						<td class = "alert alert-success">Total Vote</td>
 					
 					</thead>
 					<?php
@@ -202,6 +268,7 @@ $count_NCP_DalitWomanMember=0;
 					<tbody> 
 						<td><?php echo $fetch ['firstname']. " ".$fetch ['lastname'];?></td>
 						<td><img src = "../admin/<?php echo $fetch ['img'];?>" style = "width:40px; height:40px; border-radius:500px; " >
+						<td><?php echo $fetch ['party_name']; ?></td>
 
                       
 
@@ -219,25 +286,38 @@ $count_NCP_DalitWomanMember=0;
 </div>  <!--close container-->           
 <!---Testing chart -->
 <?php
+
 	$dataPoints1 = array(
-		array("label"=> "Ward Chairperson", "y"=> $count_NCP_WardChairperson),
-		array("label"=> "Member", "y"=> $count_NCP_Member),
-		array("label"=> "Woman Member", "y"=>$count_NCP_WomanMember),
-		array("label"=> "CPN", "y"=> $count_NCP_DalitWomanMember)
+		array("label"=> "Mayor", "y"=> $count_nepalCommunistParty_Mayor),
+		array("label"=> "Ward Chairperson", "y"=> $count_nepalCommunistParty_WardChairperson),
+		array("label"=> "Member", "y"=> $count_nepalCommunistParty_Member),
+		array("label"=> "Woman Member", "y"=>$count_nepalCommunistParty_WomanMember),
+		array("label"=> "DalitWomanMember", "y"=> $count_nepalCommunistParty_DalitWomanMember)
 
 	);
 	$dataPoints2 = array(
-		array("label"=> "Ward Chairperson", "y"=> 64.61),
-		array("label"=> "Member", "y"=> 70.55),
-		array("label"=> "Woman Member", "y"=> 72.50),
-		array("label"=> "CPN", "y"=> 81.30),
+		array("label"=> "Mayor", "y"=> $count_nepaliCongress_Mayor),
+		array("label"=> "Ward Chairperson", "y"=> $count_nepaliCongress_WardChairperson),
+		array("label"=> "Member", "y"=> $count_nepaliCongress_Member),
+		array("label"=> "Woman Member", "y"=> $count_nepaliCongress_WomanMember),
+		array("label"=> "DalitWomanMember", "y"=> $count_nepaliCongress_DalitWomanMember),
 
 	);
 	$dataPoints3 = array(
+		array("label"=> "Mayor", "y"=> $count_rastriyaJanataParty_Mayor),
+
 		array("label"=> "Ward Chairperson", "y"=> 4.61),
 		array("label"=> "Member", "y"=> 70.55),
 		array("label"=> "Woman Member", "y"=> 2.50),
-		array("label"=> "CPN", "y"=> 81.30),
+		array("label"=> "DalitWomanMember", "y"=> 81.30),
+
+	);
+	$dataPoints4 = array(
+		array("label"=> "Mayor", "y"=> $count_samajbadiParty_Mayor),
+		array("label"=> "Ward Chairperson", "y"=> 100.61),
+		array("label"=> "Member", "y"=> 100),
+		array("label"=> "Woman Member", "y"=> 10.50),
+		array("label"=> "DalitWomanMember", "y"=> 100.30),
 
 	);
 	
@@ -263,25 +343,33 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "column",
-		name: "Real Trees",
+		name: "Nepal Communist Party",
 		indexLabel: "{y}",
-		yValueFormatString: "$#0.##",
+		// yValueFormatString: "$#0.##",
+	
 		showInLegend: true,
 		dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
 	},{
 		type: "column",
-		name: "Artificial Trees",
+		name: "Nepali Congress",
 		indexLabel: "{y}",
-		yValueFormatString: "$#0.##",
+		// yValueFormatString: "$#0.##",
 		showInLegend: true,
 		dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
 	},{
 		type: "column",
-		name: "Artificial Trees",
+		name: "Rastriya Janata Party",
 		indexLabel: "{y}",
-		yValueFormatString: "$#0.##",
+		// yValueFormatString: "$#0.##",
 		showInLegend: true,
 		dataPoints: <?php echo json_encode($dataPoints3, JSON_NUMERIC_CHECK); ?>
+	},{
+		type: "column",
+		name: "Samajbadi Party",
+		indexLabel: "{y}",
+		// yValueFormatString: "$#0.##",
+		showInLegend: true,
+		dataPoints: <?php echo json_encode($dataPoints4, JSON_NUMERIC_CHECK); ?>
 	}]
 });
 chart.render();

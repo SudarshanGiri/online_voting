@@ -38,11 +38,14 @@ form{
 
 .personal-details{
     padding: 10px 0;
-
+    width: 100%;
     border: 2px solid #ddd;
     flex-wrap: wrap;
     justify-content: space-evenly;
     display: flex;
+}
+.personal-details table input[type="text"] {
+    width: 100%;
 }
 .personal-details .title{
     width: 100%;

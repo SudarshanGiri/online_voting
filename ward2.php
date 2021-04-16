@@ -1,5 +1,5 @@
 <?php include ('head2.php');?>
-<?php include("sess.php")?>
+<?php include("sess2.php")?>
 <body>
     
         <?php include ('side_bar.php');?>
