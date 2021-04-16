@@ -36,7 +36,7 @@
             else{
                 //create a separate result table for the Election Result
                 $conn->query("create table votes_$election_id(
-                    vote_id int(255) not null,
+                    vote_id int(255) not null auto_increment,
                     candidate_id varchar(255) not null,
                     voters_id varchar(255) not null,
                     primary key(vote_id)

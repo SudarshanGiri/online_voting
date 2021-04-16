@@ -12,12 +12,16 @@
 		$numberOfRows = $result->num_rows;				
 		$sql = $conn->query("SELECT * FROM voters WHERE voters_id = '$idno'  && `account` = 'active' && `status` = 'Unvoted'") or die(mysqli_errno());
 
+		// echo $_POST['secret_voter_id'];
+		// echo $row['secret_voter_id'];
+		// die();
+
 
 		if ($numberOfRows > 0 && $_POST['secret_voter_id']==$row['secret_voter_id']){
 			session_start();
 			$data=$sql->fetch_array();
 				$_SESSION['voters_id'] = $row['voters_id'];
-				//  $_SESSION['secret_voter_id'] = $row['secret_voter_id'];
+				 $_SESSION['secret_voter_id'] = $row['secret_voter_id'];
 
 				header('location:ward2.php');
 
@@ -27,7 +31,12 @@
 		
 		if($voted == 1){
 			echo " <br><center><div style='background-color:white'><font color= 'red'  >You have already voted</center></font><div>";
-		}else{
+		}
+		if(!$numberOfRows){
+			echo " <br><center><div style='background-color:white;display:block;'><font color= 'red'>You are not verified !</center></font><div>";
+
+		}
+		else{
 			echo " <br><center><div style='background-color:white;display:block;'><font color= 'red'>Login Error !</center></font><div>";
 		}
 	

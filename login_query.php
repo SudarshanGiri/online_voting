@@ -16,7 +16,9 @@
 			session_start();
 			$data=$sql->fetch_array();
 			if(password_verify($password, $data['password'])){
+		
 				$_SESSION['voters_id'] = $row['voters_id'];
+				$_SESSION['secret_voters_id'] = $row['secret_voters_id'];
 				header('location:ward2.php');
 				header('location:voter-details-page.php');
 

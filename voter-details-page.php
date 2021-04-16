@@ -46,7 +46,7 @@
                         <div>Citizenship Front: <img src="register/<?php echo $row1 ['img'];?>" alt="" width="350px" height="300px"></div>
                         <div>Citizenship Back: <img src="register/<?php echo $row1 ['citizenship_back'];?>" alt="" width="350px" height="300px"></div>
                     </div>
-                    <div class="right-container animate__slideInRight " style="animation-duration:0.6s;">
+                    <div class="right-container animate__slideInRight " style="animation-duration:0.6s;" id="login-box-2">
                         <form action="" method="POST">
                             <div>Please Enter the Secret ID to Vote</div>
                             <div>
@@ -65,7 +65,79 @@
 
                 </div>
 
-              
+<!--testing ----->
+<?php
+	require_once 'admin/dbcon.php';
+    $query = $conn->query("SELECT *  FROM election where status='Active' ");
+    $numberOfRows = $query->num_rows;
+    if($numberOfRows>0){
+        echo "scheduled";
+        while($row1 = $query->fetch_array()){
+            $start_date=$row1['start_date'];
+            $end_date=$row1['end_date'];
+            date_default_timezone_set("Asia/Kathmandu");
+    
+            $start_date1=new DateTime($start_date);
+            $end_date1=new DateTime($end_date);
+        
+            echo "start date is". $start_date;
+            echo "end date is". $end_date;
+            // date_default_timezone_set('UTC');
+        
+            // $currentDateTime=date('Y-m-d H:i:s');//get current date and time
+            $currentDateTime=new DateTime();//get current date and time
+            print_r ($currentDateTime);
+            print_r($start_date1);
+        
+        
+        
+            //if scheduled start dateTime is greater than current dateTime
+            if ($start_date1>$currentDateTime){
+                echo"it is greater";
+                echo"<script>";
+                    // echo'document.getElementById("demo").innerHTML = "EXPIRED";';
+                    echo 'document.getElementById("login-box-2").innerHTML = "<h1>You cannot Vote Voting Period has EXPIRED.</h1>"; ';
+        
+                echo "</script>";
+            }
+            //if scheduled end dateTime is less than current dateTime
+            if ($end_date1<$currentDateTime){
+                echo "it is less";
+                echo"<script>";
+                // echo'document.getElementById("demo").innerHTML = "EXPIRED";';
+                echo 'document.getElementById("login-box-2").innerHTML = "<h1>You cannot Vote Voting Period has EXPIRED.</h1>"; ';
+        
+                echo "</script>";
+            }
+    
+        }
+       
+  
+    }
+    else{
+            echo "not scheduled";
+            echo "No election is scheduled yet";
+            echo"<script>";
+            // echo'document.getElementById("demo").innerHTML = "EXPIRED";';
+            echo 'document.getElementById("login-box-2").innerHTML = "<h1>No election is scheduled yet.</h1>"; ';
+    
+            echo "</script>";
+    
+        
+    }			
+
+   
+
+
+
+
+
+?>
+
+
+
+
+<!--end testing--->
                 
     
 

@@ -1,4 +1,8 @@
 <?php  $page='voter';include ('head.php');?>
+<?php include ('login_query.php');
+
+?>
+
 <body>
     
     <div class="animate__animated animate__fadeInDown container login-box col-md-3 " id="login-box">
@@ -27,7 +31,6 @@
                         
                     </fieldset>
                     
-                            <?php include ('login_query.php');?>
                 </form>
                <div class="text-center" style="margin:5px;"> <h6><b>Note:</b> You can  vote  only once </h6></div>
             </div>
@@ -40,68 +43,7 @@
 <?php include ('script.php');?>
 
 
-<!--testing ----->
-<?php
-    $query = $conn->query("SELECT *  FROM election where status='Active' ");
-    while($row1 = $query->fetch_array()){
-        $start_date=$row1['start_date'];
-        $end_date=$row1['end_date'];
 
-    }
-    date_default_timezone_set("Asia/Kathmandu");
-
-    $start_date1=new DateTime($start_date);
-    $end_date1=new DateTime($end_date);
-
-    echo "start date is $start_date";
-    echo "end date is $end_date";
-    // date_default_timezone_set('UTC');
-
-    // $currentDateTime=date('Y-m-d H:i:s');//get current date and time
-    $currentDateTime=new DateTime();//get current date and time
-    print_r ($currentDateTime);
-    print_r($start_date1);
-
-
-
-    //if scheduled start dateTime is greater than current dateTime
-    if ($start_date1>$currentDateTime){
-        echo"it is greater";
-        echo"<script>";
-            // echo'document.getElementById("demo").innerHTML = "EXPIRED";';
-            echo 'document.getElementById("login-box").innerHTML = "<h1>You cannot Vote Voting Period has EXPIRED.</h1>"; ';
-
-        echo "</script>";
-    }
-    //if scheduled end dateTime is greater than current dateTime
-    if ($end_date1<$currentDateTime){
-        echo "it is less";
-        echo"<script>";
-        // echo'document.getElementById("demo").innerHTML = "EXPIRED";';
-        echo 'document.getElementById("login-box").innerHTML = "<h1>You cannot Vote Voting Period has EXPIRED.</h1>"; ';
-
-        echo "</script>";
-    }
-    // else{
-    //     echo "No election is scheduled yet";
-    //     echo"<script>";
-    //     echo'document.getElementById("demo").innerHTML = "EXPIRED";';
-    //     echo 'document.getElementById("login-box").innerHTML = "<h1>No election is scheduled yet.</h1>"; ';
-
-    //     echo "</script>";
-
-    // }
-
-
-
-
-
-?>
-
-
-
-
-<!--end testing--->
 </body>
 
 
